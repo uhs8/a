@@ -1,0 +1,233 @@
+<html lang="jp"><head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="iOS Tweak / App Developer and Designer.">
+    <meta name="author" content="LaughingQuoll">
+
+    <title>LaughingQuoll</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body><nav class="navbar navbar-light bg-faded fixed-top navbar-toggleable-md">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">
+      LaughingQuoll
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav mr-auto">
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+      </ul>
+  </ul></div>
+  </nav>
+  
+    <section id="content">
+      <div class="row">
+        <div class="col-md-6 offset-md-1">
+          <br>
+          <h1>山陽自動車学校 予約サイト自動ログイン方法 <ios></h1>
+        </div>
+        <div class="col-md-4" align="right">
+          <br>
+          <h4 style="margin: 0 0 0 0;"><i>Saturday 6th May, 2017</i></h4>
+          <h4 style="margin: 0 0 0 0;"><a href="https://twitter.com/LaughingQuoll">LaughingQuoll</a></h4>
+        </div>
+      </div>
+    </section>
+    <section id="Basics">
+      <div class="row">
+        <div class="col-md-2 offset-md-1">
+          <div class="card" style="width: 10rem;">
+            <div class="card-block">
+              <h4 class="card-title">Contents</h4>
+              <p class="card-text">
+                </p><li><a onclick="jump('Basics')">Basics</a></li>
+                <li><a onclick="jump('Theos')">Theos</a></li>
+                <li><a onclick="jump('Headers')">Headers</a></li>
+                <li><a onclick="jump('Tweaking')">Tweaking</a></li>
+                <li><a onclick="jump('Summary')">Summary</a></li>
+              <p></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <h2>The Basics</h2>
+          <p>We all have to start somewhere. So let’s start with our development environment.</p>
+          <p>To make tweaks you will need to install Theos, a command line based compiling tool which will handle compiling, packaging, and installing our tweaks onto our devices. To install Theos on your iOS, macOS, Linux, or Windows device, please follow this <a href="https://github.com/theos/theos/wiki/Installation"><i>guide</i></a>.</p>
+          <p>Once Theos is installed you’re ready to start making tweaks. You will need a good text editor to edit and create the tweak; personally, I recommend <a href="https://atom.io/"><i>Atom</i></a>. It’s sleek and easy to use compared to others.</p>
+          <p>It’s a good idea to have some understanding of Objective-C when developing tweaks, but for this series it will be assumed you have little to no experience at all. If you do have some then this should be a breeze! </p>
+        </div>
+      </div>
+    
+  </section>
+  <section id="Theos">
+    <div class="row">
+      <div class="row">
+        <div class="col-md-7 offset-md-1">
+          <h2>Theos</h2>
+          <p>Now that you’ve installed Theos, you’re ready to begin using it. Theos lets you easily set up and create projects and it comes with a few essential commands you do need to know.</p>
+          <ol>
+          <li>make package
+          <ol>
+          <li>1.	Make Package will scan your code for errors and then compile your program into our familiar .DEB format. In this format, it’s ready for installation.</li>
+          </ol>
+          </li>
+          <li>make install
+          <ol>
+          <li>1.	This installs your new DEB file on your device. SSH is a great way to do this and you can use <a href="http://iphonedevwiki.net/index.php/SSH_Over_USB"><i>SSH over USB</i></a> or plain old SSH via Wi-Fi, whichever you’re more comfortable with. The default SSH password for iOS root is <b>alpine</b>, and you should consider changing it immediately.</li>
+          </ol>
+          </li>
+          </ol>
+          <p>These commands can be combined, and they will be followed in order. For example, <b>make package install</b> will make the package and then install it.</p>
+        </div>
+        <div class="col-md-3">
+          <br>
+          <img src="./assets/theos.png" alt="Theos Make Package" class="img-thumbnail">
+          <br>
+          <p>Example output of <b>make package</b> in a Theos project.</p>
+        </div>
+      </div>
+    </div>
+    </section>
+    <section id="Headers">
+      <div class="row">
+        <div class="row">
+          <div class="col-md-5 offset-md-1">
+            <h2>Headers</h2>
+            <p>Headers are essential when making a jailbreak tweak. It tells the compiler what methods exist and helps prevent errors. It’s used to define methods, properties, and ivars among other things.</p>
+            <p>In your Theos installation you will need to download and install headers; I got mine <a href="https://github.com/theos/headers"><i>here</i></a>. Once downloaded, place them in the include folder found in your Theos installation.</p>
+            <p>If you can’t find a header, or you find one but importing it causes errors, you can always opt to create your own headers manually. On the other hand, you must be careful if you choose the manual route to make sure the methods you use are legitimate. If they’re not, you could find yourself booted into safe mode or the tweak simply won’t work as expected.</p>
+            <p>Here is an example of a home made header:</p>
+            <pre style="color: #bd4147;">@interface SomeView : UIView
+@property (assign) bool someBool;
+-(id)someValueToReturn;
+-(void)someMethodToHack;
+@end</pre>
+          <p>This header starts off with the @interface declaration, which indicates the object name and its inheritance. Below that the following lines define methods and properties, which can be accessed and modified on demand.</p>
+          </div>
+          <div class="col-md-5">
+            <div class="card">
+              <div class="card-block">
+                  <pre style="margin-bottom: 0;">@interface NCMaterialView : UIView {
+	unsigned long long _styleOptions;
+	_UIBackdropView* _backdropView;
+	UIView* _lightOverlayView;
+	UIView* _whiteOverlayView;
+	UIView* _cutoutOverlayView;
+	NCMaterialSettings* _settings;
+}
+@property (nonatomic,copy) NSString * groupName;
+@property (assign,nonatomic) double grayscaleValue;
+@property (assign,nonatomic) double cornerRadius;
+-(void)setCornerRadius:(double)arg1 ;
+-(double)cornerRadius;
+-(double)_continuousCornerRadius;
+-(void)_setContinuousCornerRadius:(double)arg1 ;
+-(void)settings:(id)arg1 changedValueForKey:(id)arg2 ;
+-(void)_configureIfNecessary;
+-(void)_configureBackdropViewIfNecessary;
+-(void)_setSubviewsContinuousCornerRadius:(double)arg1 ;
+-(double)grayscaleValue;
+-(double)_subviewsContinuousCornerRadius;
+@end</pre>
+              </div>
+            </div>
+            <p>An example of a dumped header. This header is for the NCMaterialView class.</p>
+          </div>
+        </div>
+      </div>
+      </section>
+      <section id="Tweaking">
+        <div class="row">
+          <div class="row">
+            <div class="col-md-7 offset-md-1">
+              <h2>Tweaking</h2>
+              <p>To start making a tweak, use the terminal to CD into your projects folder and run the following command: /theos/bin/nic.pl. Next, select Tweak in the list of provided templates and follow the prompts to name and personalize the tweak identifiers. When you’re asked about filter bundles accept the defaults for the rest of the prompts.</p>
+              <p>Once finished with the steps above, CD into the new project directory. In my example, I’ve called the tweak Test so this is the name I would use for CD.</p>
+              <p>Now just visit your editor, add the new project folder, and select the Makefile file. Add the following line under the tweak name:</p>
+              <code>TWEAKNAME_FRAMEWORKS = UIKit</code>
+              <p>This will make Theos link to the UIKit framework so it knows about UIKit.</p>
+              <p>Next, open tweak.xm. This is where you would hook a class name using logos methods. To hook a class, use:</p>
+              <code>%hook ClassName</code>
+              <p>Under that, you can hook a class method:</p>
+              <pre>+ (id)sharedInstance {
+  return %orig;
+}</pre>
+              <p>Or you can hook an instance method with an argument:</p>
+              <pre>- (void)messageName:(int)argument {
+	%log; // Log all argument values to the system log and any other good stuff.
+	%orig; // Call the original function with its original arguments.
+	%orig(nil); // Call through to the original function with a new custom argument.
+}</pre>
+<p>You can also hook an instance method with no arguments:</p>
+<pre>- (id)noArguments {
+	%log;
+	id original = %orig;
+	[original doSomethingDifferent];
+	return original;
+}</pre>
+<p>When you’re finished hooking stuff, you can finish your %hook off with %end. This is vital; otherwise you will get errors when compiling.</p>
+<p>After you’ve hooked a method, use <b>make package install</b> to compile the tweak and install it on your device.</p>
+            </div>
+            <div class="col-md-3">
+              <br>
+              <img src="./assets/createpackage.png" alt="Theos Make Package" class="img-thumbnail">
+              <br>
+              <p>Creating a package using Theos NIC.</p>
+              <br>
+              <img src="./assets/makefile.png" alt="Theos Make Package" class="img-thumbnail">
+              <br>
+              <p>Contents of the MAKEFILE.</p>
+              <br>
+              <img src="./assets/hook.png" alt="Theos Make Package" class="img-thumbnail">
+              <br>
+              <p>An dummmy example of a complete hook.</p>
+            </div>
+          </div>
+        </div>
+        </section>
+        <section id="Summary">
+          <div class="row">
+            <div class="row">
+              <div class="col-md-8 offset-md-1">
+                <h2>Summary</h2>
+                <p>In this tutorial, we went over how to configure a computer for tweak development, and the differences between headers and hook methods. In the next tutorial, we will show you how to make a functioning jailbreak tweak. Stay tuned!</p>
+                <p>To ensure you don't miss a new tutorial follow me on Twitter <a href="https://twitter.com/LaughingQuoll"><i>@LaughingQuoll</i></a>.</p>
+              </div>
+              <div class="col-md-2">
+              </div>
+            </div>
+          </div>
+        </section>
+
+  
+    <hr>
+    <section id="footer">
+      <footer>
+        <center><p>Copyright © 2017 LaughingQuoll</p></center>
+      </footer>
+    </section>
+    <script>
+    function jump(h){
+    var top = document.getElementById(h).offsetTop;
+    window.scrollTo(0, top);
+    }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="./assets/bootstrap.min.js"></script>
+
+
+</body></html>
